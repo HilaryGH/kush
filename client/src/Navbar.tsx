@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <div className="h-12 w-12 overflow-visible -my-2 flex items-center">
             <img
-              src="/kushna%20logo.jpeg"
+              src="/kushina%20logo.png"
               alt="Kushena logo"
               className="h-16 w-auto object-contain"
             />
