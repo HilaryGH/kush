@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -12,15 +13,15 @@ const Navbar = () => {
   }
 
   return (
-    <header className="sticky top-0 z-20 bg-white/80 backdrop-blur border-b border-yellow-300">
+    <header className="sticky top-0 z-20 bg-white/80 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="h-12 w-12 overflow-visible -my-2 flex items-center">
+          <div className="h-12 w-14 overflow-visible -my-3 flex items-center">
             <img
-              src="/kushina%20logo.png"
+              src="/kushina%20logo%202.png"
               alt="Kushena logo"
-              className="h-16 w-auto object-contain"
+              className="h-20 w-auto object-contain"
             />
           </div>
           <div className="flex flex-col leading-tight">
@@ -35,14 +36,14 @@ const Navbar = () => {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-8 text-[16px] font-medium text-slate-700 md:flex">
-          <a href="#how-it-works" className="hover:text-yellow-500 transition-colors">
-            How it works
+          <Link to="/" className="hover:text-yellow-500 transition-colors">
+            Home
+          </Link>
+          <a href="#restaurant" className="hover:text-yellow-500 transition-colors">
+            Restaurant
           </a>
-          <a href="#menu" className="hover:text-yellow-500 transition-colors">
-            Popular dishes
-          </a>
-          <a href="#cities" className="hover:text-yellow-500 transition-colors">
-            Cities
+          <a href="#about" className="hover:text-yellow-500 transition-colors">
+            About
           </a>
           <a href="#contact" className="hover:text-yellow-500 transition-colors">
             Contact
@@ -51,9 +52,12 @@ const Navbar = () => {
 
         {/* Desktop actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <button className="rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors">
+          <Link
+            to="/signin"
+            className="rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors"
+          >
             Sign in
-          </button>
+          </Link>
           <button className="rounded-full bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-black shadow-md shadow-yellow-200 hover:shadow-lg hover:shadow-yellow-300 transition-all">
             Order now
           </button>
@@ -82,26 +86,26 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden border-t border-yellow-200 bg-white">
           <div className="mx-auto max-w-6xl px-4 py-4 space-y-3">
-            <a
-              href="#how-it-works"
+            <Link
+              to="/"
               onClick={closeMobileMenu}
               className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
             >
-              How it works
+              Home
+            </Link>
+            <a
+              href="#restaurant"
+              onClick={closeMobileMenu}
+              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
+            >
+              Restaurant
             </a>
             <a
-              href="#menu"
+              href="#about"
               onClick={closeMobileMenu}
               className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
             >
-              Popular dishes
-            </a>
-            <a
-              href="#cities"
-              onClick={closeMobileMenu}
-              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
-            >
-              Cities
+              About
             </a>
             <a
               href="#contact"
@@ -111,12 +115,13 @@ const Navbar = () => {
               Contact
             </a>
             <div className="pt-3 space-y-2 border-t border-yellow-200">
-              <button
+              <Link
+                to="/signin"
                 onClick={closeMobileMenu}
-                className="w-full rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors"
+                className="w-full rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors text-center block"
               >
                 Sign in
-              </button>
+              </Link>
               <button
                 onClick={closeMobileMenu}
                 className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-black shadow-md shadow-yellow-200 hover:shadow-lg hover:shadow-yellow-300 transition-all"
