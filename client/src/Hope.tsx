@@ -17,16 +17,15 @@ const Hope = () => {
             backgroundRepeat: 'no-repeat',
           }}
         >
-          {/* Mobile: Rotated 90 degrees */}
+          {/* Mobile: Normal orientation */}
           <div 
-            className="md:hidden absolute inset-0"
+            className="md:hidden absolute inset-x-0 top-0"
             style={{ 
               backgroundImage: 'url(/hero%20page.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
-              transform: 'rotate(90deg) scale(1.5)',
-              transformOrigin: 'center center',
+              height: '50%',
             }}
           ></div>
           {/* Desktop: Normal orientation */}
