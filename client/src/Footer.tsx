@@ -31,11 +31,6 @@ const Footer = () => {
             <h3 className="text-[17px] font-semibold text-slate-900 mb-5">Quick Links</h3>
             <ul className="space-y-3.5 text-[16px] text-slate-600">
               <li>
-                <a href="#how-it-works" className="hover:text-yellow-500 transition-colors">
-                  How it works
-                </a>
-              </li>
-              <li>
                 <a href="#menu" className="hover:text-yellow-500 transition-colors">
                   Popular dishes
                 </a>

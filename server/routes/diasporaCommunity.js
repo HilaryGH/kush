@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const DiasporaCommunity = require('../models/DiasporaCommunity');
-const upload = require('../middleware/upload');
+const { upload, uploadToCloudinary } = require('../middleware/upload');
 
 // Submit Diaspora Community Application
-router.post('/submit', upload.single('passport'), async (req, res) => {
+router.post('/submit', upload.single('passport'), uploadToCloudinary('diaspora-community'), async (req, res) => {
   try {
     const formData = req.body;
     const file = req.file;
 
     const applicationData = {
       ...formData,
-      passport: file?.filename,
+      passport: file?.cloudinaryUrl,
     };
 
     const application = new DiasporaCommunity(applicationData);

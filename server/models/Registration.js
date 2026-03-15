@@ -19,6 +19,7 @@ const registrationSchema = new mongoose.Schema({
   ownerManagerName: String,
   phone: String,
   email: String,
+  password: String,
   whatsapp: String,
   telegram: String,
   businessType: String,

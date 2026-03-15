@@ -1,23 +1,9 @@
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs');
+const { uploadFile } = require('../utils/cloudinary');
 
-// Ensure uploads directory exists
-const uploadsDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir, { recursive: true });
-}
-
-// Configure storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadsDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
-});
+// Use memory storage to get file buffers for Cloudinary
+const storage = multer.memoryStorage();
 
 // File filter
 const fileFilter = (req, file, cb) => {
@@ -32,7 +18,7 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-// Configure multer
+// Configure multer with memory storage
 const upload = multer({
   storage: storage,
   limits: {
@@ -41,4 +27,50 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+/**
+ * Middleware to upload files to Cloudinary after multer processing
+ * @param {string} folder - Cloudinary folder path (optional)
+ */
+const uploadToCloudinary = (folder = 'uploads') => {
+  return async (req, res, next) => {
+    try {
+      // Process single file
+      if (req.file) {
+        const result = await uploadFile(req.file, folder);
+        req.file.cloudinaryUrl = result.url;
+        req.file.publicId = result.publicId;
+      }
+
+      // Process multiple files
+      if (req.files) {
+        for (const field in req.files) {
+          if (Array.isArray(req.files[field])) {
+            for (const file of req.files[field]) {
+              const result = await uploadFile(file, folder);
+              file.cloudinaryUrl = result.url;
+              file.publicId = result.publicId;
+            }
+          } else {
+            const result = await uploadFile(req.files[field], folder);
+            req.files[field].cloudinaryUrl = result.url;
+            req.files[field].publicId = result.publicId;
+          }
+        }
+      }
+
+      next();
+    } catch (error) {
+      console.error('Cloudinary upload error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to upload file(s) to Cloudinary',
+        error: error.message
+      });
+    }
+  };
+};
+
+// Export for backward compatibility
 module.exports = upload;
+module.exports.upload = upload;
+module.exports.uploadToCloudinary = uploadToCloudinary;

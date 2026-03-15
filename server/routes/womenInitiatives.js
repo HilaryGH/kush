@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const WomenInitiatives = require('../models/WomenInitiatives');
-const upload = require('../middleware/upload');
+const { upload, uploadToCloudinary } = require('../middleware/upload');
 
 // Submit Women Initiatives Application
 router.post('/submit', upload.fields([
   { name: 'idDocument', maxCount: 1 },
   { name: 'profilePhoto', maxCount: 1 },
   { name: 'certificates', maxCount: 1 }
-]), async (req, res) => {
+]), uploadToCloudinary('women-initiatives'), async (req, res) => {
   try {
     const formData = req.body;
     const files = req.files;
@@ -16,9 +16,9 @@ router.post('/submit', upload.fields([
     const applicationData = {
       ...formData,
       age: parseInt(formData.age),
-      idDocument: files.idDocument?.[0]?.filename,
-      profilePhoto: files.profilePhoto?.[0]?.filename,
-      certificates: files.certificates?.[0]?.filename,
+      idDocument: files.idDocument?.[0]?.cloudinaryUrl,
+      profilePhoto: files.profilePhoto?.[0]?.cloudinaryUrl,
+      certificates: files.certificates?.[0]?.cloudinaryUrl,
     };
 
     const application = new WomenInitiatives(applicationData);

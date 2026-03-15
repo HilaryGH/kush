@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const location = useLocation()
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -12,8 +13,12 @@ const Navbar = () => {
     setIsMobileMenuOpen(false)
   }
 
+  const isActive = (path: string) => {
+    return location.pathname === path
+  }
+
   return (
-    <header className="sticky top-0 z-20 bg-white/80 backdrop-blur">
+    <header className="sticky top-0 z-20 bg-black">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
@@ -28,25 +33,56 @@ const Navbar = () => {
             <span className="text-xl font-semibold tracking-tight text-yellow-500">
               Kushena
             </span>
-            <span className="text-sm text-slate-500">
+            <span className="text-sm text-slate-300">
               Fresh. Fast. To your door.
             </span>
           </div>
         </div>
 
         {/* Desktop links */}
-        <div className="hidden items-center gap-8 text-[16px] font-medium text-slate-700 md:flex">
-          <Link to="/" className="hover:text-yellow-500 transition-colors">
+        <div className="hidden items-center gap-8 text-[16px] font-medium text-white md:flex">
+          <Link 
+            to="/" 
+            className={`relative transition-colors ${
+              isActive('/') 
+                ? 'text-yellow-500 font-semibold' 
+                : 'hover:text-yellow-400'
+            }`}
+          >
             Home
+            {isActive('/') && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full"></span>
+            )}
           </Link>
-          <a href="#restaurant" className="hover:text-yellow-500 transition-colors">
+          <Link 
+            to="/restaurants" 
+            className={`relative transition-colors group ${
+              isActive('/restaurants') 
+                ? 'text-yellow-500 font-semibold' 
+                : 'hover:text-yellow-400'
+            }`}
+          >
             Restaurant
-          </a>
-          <a href="#about" className="hover:text-yellow-500 transition-colors">
+            {isActive('/restaurants') && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full"></span>
+            )}
+            {!isActive('/restaurants') && (
+              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+            )}
+          </Link>
+          <a 
+            href="#about" 
+            className="hover:text-yellow-400 transition-colors relative group text-white"
+          >
             About
+            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
           </a>
-          <a href="#contact" className="hover:text-yellow-500 transition-colors">
+          <a 
+            href="#contact" 
+            className="hover:text-yellow-400 transition-colors relative group text-white"
+          >
             Contact
+            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
           </a>
         </div>
 
@@ -54,11 +90,16 @@ const Navbar = () => {
         <div className="hidden items-center gap-3 md:flex">
           <Link
             to="/signin"
-            className="rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors"
+            className={`flex items-center gap-2 text-white hover:text-yellow-400 transition-colors ${
+              isActive('/signin') ? 'text-yellow-500' : ''
+            }`}
           >
-            Sign in
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span className="text-[16px] font-medium">Sign in</span>
           </Link>
-          <button className="rounded-full bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-black shadow-md shadow-yellow-200 hover:shadow-lg hover:shadow-yellow-300 transition-all">
+          <button className="rounded-lg bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-white shadow-md shadow-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/50 transition-all hover:opacity-90 active:scale-[0.98]">
             Order now
           </button>
         </div>
@@ -66,7 +107,7 @@ const Navbar = () => {
         {/* Mobile button */}
         <button
           onClick={toggleMobileMenu}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-yellow-300 text-slate-700 md:hidden transition-colors hover:bg-yellow-50"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-yellow-500/50 text-white md:hidden transition-colors hover:bg-yellow-500/10"
           aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
         >
           <span className="sr-only">{isMobileMenuOpen ? "Close menu" : "Open menu"}</span>
@@ -84,47 +125,60 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-yellow-200 bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-4 space-y-3">
+        <div className="md:hidden border-t border-yellow-500/20 bg-black animate-fadeIn">
+          <div className="mx-auto max-w-6xl px-4 py-4 space-y-1">
             <Link
               to="/"
               onClick={closeMobileMenu}
-              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
+              className={`block py-2.5 px-3 rounded-lg text-[16px] font-medium transition-colors ${
+                isActive('/')
+                  ? 'bg-yellow-500/20 text-yellow-500 font-semibold'
+                  : 'text-white hover:text-yellow-400 hover:bg-yellow-500/10'
+              }`}
             >
               Home
             </Link>
-            <a
-              href="#restaurant"
+            <Link
+              to="/restaurants"
               onClick={closeMobileMenu}
-              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
+              className={`block py-2.5 px-3 rounded-lg text-[16px] font-medium transition-colors ${
+                isActive('/restaurants')
+                  ? 'bg-yellow-500/20 text-yellow-500 font-semibold'
+                  : 'text-white hover:text-yellow-400 hover:bg-yellow-500/10'
+              }`}
             >
               Restaurant
-            </a>
+            </Link>
             <a
               href="#about"
               onClick={closeMobileMenu}
-              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
+              className="block py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors"
             >
               About
             </a>
             <a
               href="#contact"
               onClick={closeMobileMenu}
-              className="block py-2.5 text-[16px] font-medium text-slate-700 hover:text-yellow-500 transition-colors"
+              className="block py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors"
             >
               Contact
             </a>
-            <div className="pt-3 space-y-2 border-t border-yellow-200">
+            <div className="pt-3 space-y-2 border-t border-yellow-500/20">
               <Link
                 to="/signin"
                 onClick={closeMobileMenu}
-                className="w-full rounded-full border border-yellow-300 px-6 py-2.5 text-[16px] font-medium text-yellow-600 hover:border-yellow-400 hover:text-yellow-700 transition-colors text-center block"
+                className={`flex items-center gap-2 py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors ${
+                  isActive('/signin') ? 'text-yellow-500 bg-yellow-500/20' : ''
+                }`}
               >
-                Sign in
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span>Sign in</span>
               </Link>
               <button
                 onClick={closeMobileMenu}
-                className="w-full rounded-full bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-black shadow-md shadow-yellow-200 hover:shadow-lg hover:shadow-yellow-300 transition-all"
+                className="w-full rounded-lg bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-white shadow-md shadow-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/50 transition-all hover:opacity-90 active:scale-[0.98]"
               >
                 Order now
               </button>
