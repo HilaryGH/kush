@@ -1,187 +1,149 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+
+const navLinks = [
+  { label: 'Home', to: '/' },
+  { label: 'Restaurants', to: '/restaurants' },
+]
+
+const anchorLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Community', href: '#community' },
+  { label: 'Contact', href: '#contact' },
+]
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen)
-  }
+  const isActive = (path: string) => location.pathname === path
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false)
-  }
-
-  const isActive = (path: string) => {
-    return location.pathname === path
+  const closeMobileMenu = () => setIsMobileMenuOpen(false)
+  const goToSignIn = () => {
+    closeMobileMenu()
+    navigate('/signin')
   }
 
   return (
-    <header className="sticky top-0 z-20 bg-black">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="h-12 w-14 overflow-visible -my-3 flex items-center">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#120d08]/82 shadow-[0_14px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 sm:py-4">
+        <Link to="/" className="flex items-center gap-3" onClick={closeMobileMenu}>
+          <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-white/8 shadow-[0_10px_24px_rgba(0,0,0,0.15)]">
             <img
               src="/kushina%20logo%202.png"
               alt="Kushena logo"
-              className="h-20 w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-xl font-semibold tracking-tight text-yellow-500">
-              Kushena
-            </span>
-            <span className="text-sm text-slate-300">
-              Fresh. Fast. To your door.
-            </span>
+            <span className="font-display text-lg text-white">Kushena</span>
+            <span className="text-xs uppercase tracking-[0.28em] text-white/45">Delivery refined</span>
           </div>
+        </Link>
+
+        <div className="hidden items-center gap-2 rounded-full border border-white/10 bg-white/7 p-1.5 md:flex">
+          {navLinks.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+                isActive(item.to)
+                  ? 'bg-[linear-gradient(135deg,_#f59e0b,_#ea580c)] text-white shadow-[0_12px_28px_rgba(245,158,11,0.32)]'
+                  : 'text-white/72 hover:text-white'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          {anchorLinks.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="rounded-full px-4 py-2 text-sm font-semibold text-white/72 transition-colors hover:text-white"
+            >
+              {item.label}
+            </a>
+          ))}
         </div>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-8 text-[16px] font-medium text-white md:flex">
-          <Link 
-            to="/" 
-            className={`relative transition-colors ${
-              isActive('/') 
-                ? 'text-yellow-500 font-semibold' 
-                : 'hover:text-yellow-400'
-            }`}
-          >
-            Home
-            {isActive('/') && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full"></span>
-            )}
-          </Link>
-          <Link 
-            to="/restaurants" 
-            className={`relative transition-colors group ${
-              isActive('/restaurants') 
-                ? 'text-yellow-500 font-semibold' 
-                : 'hover:text-yellow-400'
-            }`}
-          >
-            Restaurant
-            {isActive('/restaurants') && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full"></span>
-            )}
-            {!isActive('/restaurants') && (
-              <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-            )}
-          </Link>
-          <a 
-            href="#about" 
-            className="hover:text-yellow-400 transition-colors relative group text-white"
-          >
-            About
-            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-          </a>
-          <a 
-            href="#contact" 
-            className="hover:text-yellow-400 transition-colors relative group text-white"
-          >
-            Contact
-            <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-red-500 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-          </a>
-        </div>
-
-        {/* Desktop actions */}
         <div className="hidden items-center gap-3 md:flex">
-          <Link
-            to="/signin"
-            className={`flex items-center gap-2 text-white hover:text-yellow-400 transition-colors ${
-              isActive('/signin') ? 'text-yellow-500' : ''
+          <button
+            type="button"
+            onClick={goToSignIn}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+              isActive('/signin') ? 'text-amber-300' : 'text-white/80 hover:text-white'
             }`}
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-            <span className="text-[16px] font-medium">Sign in</span>
-          </Link>
-          <button className="rounded-lg bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-white shadow-md shadow-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/50 transition-all hover:opacity-90 active:scale-[0.98]">
-            Order now
+            Sign in
           </button>
+          <Link
+            to="/restaurants"
+            className="inline-flex items-center justify-center rounded-full bg-[linear-gradient(135deg,_#f59e0b,_#ef4444)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_16px_35px_rgba(239,68,68,0.28)] transition-all hover:-translate-y-0.5 hover:shadow-[0_20px_45px_rgba(239,68,68,0.35)]"
+          >
+            Order now
+          </Link>
         </div>
 
-        {/* Mobile button */}
         <button
-          onClick={toggleMobileMenu}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-yellow-500/50 text-white md:hidden transition-colors hover:bg-yellow-500/10"
-          aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
+          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 bg-white/8 text-white shadow-[0_10px_24px_rgba(0,0,0,0.16)] transition-colors hover:bg-white/10 md:hidden"
+          aria-label={isMobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
         >
-          <span className="sr-only">{isMobileMenuOpen ? "Close menu" : "Open menu"}</span>
           {isMobileMenuOpen ? (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M6 18L18 6M6 6l12 12" />
             </svg>
           ) : (
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
           )}
         </button>
       </nav>
 
-      {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-yellow-500/20 bg-black animate-fadeIn">
-          <div className="mx-auto max-w-6xl px-4 py-4 space-y-1">
-            <Link
-              to="/"
-              onClick={closeMobileMenu}
-              className={`block py-2.5 px-3 rounded-lg text-[16px] font-medium transition-colors ${
-                isActive('/')
-                  ? 'bg-yellow-500/20 text-yellow-500 font-semibold'
-                  : 'text-white hover:text-yellow-400 hover:bg-yellow-500/10'
-              }`}
-            >
-              Home
-            </Link>
-            <Link
-              to="/restaurants"
-              onClick={closeMobileMenu}
-              className={`block py-2.5 px-3 rounded-lg text-[16px] font-medium transition-colors ${
-                isActive('/restaurants')
-                  ? 'bg-yellow-500/20 text-yellow-500 font-semibold'
-                  : 'text-white hover:text-yellow-400 hover:bg-yellow-500/10'
-              }`}
-            >
-              Restaurant
-            </Link>
-            <a
-              href="#about"
-              onClick={closeMobileMenu}
-              className="block py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors"
-            >
-              About
-            </a>
-            <a
-              href="#contact"
-              onClick={closeMobileMenu}
-              className="block py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors"
-            >
-              Contact
-            </a>
-            <div className="pt-3 space-y-2 border-t border-yellow-500/20">
+        <div className="border-t border-white/8 bg-[#120d08]/96 px-4 py-4 backdrop-blur-xl md:hidden">
+          <div className="space-y-2">
+            {navLinks.map((item) => (
               <Link
-                to="/signin"
+                key={item.to}
+                to={item.to}
                 onClick={closeMobileMenu}
-                className={`flex items-center gap-2 py-2.5 px-3 rounded-lg text-[16px] font-medium text-white hover:text-yellow-400 hover:bg-yellow-500/10 transition-colors ${
-                  isActive('/signin') ? 'text-yellow-500 bg-yellow-500/20' : ''
+                className={`block rounded-2xl px-4 py-3 text-sm font-semibold transition-all ${
+                  isActive(item.to)
+                    ? 'bg-[linear-gradient(135deg,_rgba(245,158,11,0.2),_rgba(239,68,68,0.2))] text-white'
+                    : 'text-white/78 hover:bg-white/8 hover:text-white'
                 }`}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-                <span>Sign in</span>
+                {item.label}
               </Link>
-              <button
+            ))}
+            {anchorLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
                 onClick={closeMobileMenu}
-                className="w-full rounded-lg bg-gradient-to-r from-yellow-400 to-red-500 px-6 py-2.5 text-[16px] font-semibold text-white shadow-md shadow-yellow-500/30 hover:shadow-lg hover:shadow-yellow-500/50 transition-all hover:opacity-90 active:scale-[0.98]"
+                className="block rounded-2xl px-4 py-3 text-sm font-semibold text-white/78 transition-all hover:bg-white/8 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+            <div className="grid gap-3 pt-3">
+              <button
+                type="button"
+                onClick={goToSignIn}
+                className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center text-sm font-semibold text-white"
+              >
+                Sign in
+              </button>
+              <Link
+                to="/restaurants"
+                onClick={closeMobileMenu}
+                className="block rounded-2xl bg-[linear-gradient(135deg,_#f59e0b,_#ef4444)] px-4 py-3 text-center text-sm font-semibold text-white"
               >
                 Order now
-              </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -191,4 +153,3 @@ const Navbar = () => {
 }
 
 export default Navbar
-

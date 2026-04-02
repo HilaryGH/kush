@@ -36,7 +36,7 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <Hope />
                   <Footer />
@@ -45,35 +45,35 @@ function App() {
               <Route path="/signin" element={<SignIn />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/women-initiatives" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <WomenInitiatives />
                   <Footer />
                 </div>
               } />
               <Route path="/diaspora-community" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <DiasporaCommunity />
                   <Footer />
                 </div>
               } />
               <Route path="/professional-community" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <ProfessionalCommunity />
                   <Footer />
                 </div>
               } />
               <Route path="/premium-community" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <PremiumCommunity />
                   <Footer />
                 </div>
               } />
               <Route path="/invest-partner" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900 flex flex-col">
                   <Navbar />
                   <InvestPartner />
                   <Footer />
@@ -83,7 +83,7 @@ function App() {
               
               {/* Public Restaurants Route */}
               <Route path="/restaurants" element={
-                <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900">
+                <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 text-slate-900">
                   <Navbar />
                   <Restaurants />
                   <Footer />

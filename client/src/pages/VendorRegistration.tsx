@@ -208,54 +208,55 @@ const VendorRegistration = () => {
 
             {/* Documents */}
             <div>
-              <h2 className="text-xl font-semibold mb-4">Required Documents</h2>
+              <h2 className="text-xl font-semibold mb-2">Supporting documents</h2>
+              <p className="text-sm text-gray-600 mb-4">All file uploads are optional.</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FileInput
-                  label="Business Registration"
+                  label="Business Registration (optional)"
                   name="businessRegistration"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(files) => handleFileChange('businessRegistration', files)}
                 />
                 <FileInput
-                  label="Business License"
+                  label="Business License (optional)"
                   name="license"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(files) => handleFileChange('license', files)}
                 />
                 <FileInput
-                  label="TIN"
+                  label="TIN (optional)"
                   name="tin"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(files) => handleFileChange('tin', files)}
                 />
                 <FileInput
-                  label="Certificate"
+                  label="Certificate (optional)"
                   name="certificate"
                   accept=".pdf,.jpg,.jpeg,.png"
                   onChange={(files) => handleFileChange('certificate', files)}
                 />
                 <FileInput
-                  label="Menu Samples"
+                  label="Menu Samples (optional)"
                   name="menuSamples"
                   accept=".pdf,.jpg,.jpeg,.png"
                   multiple
                   onChange={(files) => handleFileChange('menuSamples', files)}
                 />
                 <FileInput
-                  label="Promo Video (30 seconds)"
+                  label="Promo Video (30 seconds, optional)"
                   name="promoVideo"
                   accept=".mp4,.mov,.avi"
                   onChange={(files) => handleFileChange('promoVideo', files)}
                 />
                 <FileInput
-                  label="Photos"
+                  label="Photos (optional)"
                   name="photos"
                   accept=".jpg,.jpeg,.png"
                   multiple
                   onChange={(files) => handleFileChange('photos', files)}
                 />
                 <FileInput
-                  label="Videos"
+                  label="Videos (optional)"
                   name="videos"
                   accept=".mp4,.mov,.avi"
                   multiple

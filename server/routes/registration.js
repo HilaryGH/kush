@@ -58,7 +58,7 @@ router.post('/submit', upload.fields([
     }
     
     // If registering as vendor, check for orphaned vendor records
-    if (userRole === 'vendor' && formData.registrationType === 'service-provider') {
+    if (formData.registrationType === 'service-provider') {
       const existingVendor = await Vendor.findOne({ email: normalizedEmail });
       if (existingVendor) {
         // Check if there's a corresponding user

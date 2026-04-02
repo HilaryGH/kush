@@ -22,7 +22,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
   }, ref) => {
     const selectId = id || `select-${Math.random().toString(36).substr(2, 9)}`
     
-    const baseStyles = 'w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed appearance-none bg-white cursor-pointer'
+    const isPlaceholder =
+      props.value === '' || props.value === undefined || props.value === null
+    const valueTone = isPlaceholder ? 'text-slate-300' : 'text-slate-900'
+
+    const baseStyles = `w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed appearance-none bg-white cursor-pointer ${valueTone}`
     
     const stateStyles = error
       ? 'border-red-300 focus:border-red-500 focus:ring-red-500 bg-red-50'

@@ -78,11 +78,11 @@ const PremiumCommunity = () => {
   const selectedPlan = subscriptionPlans[subscriptionPlan]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 py-12 px-4 md:px-6">
+    <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl text-slate-900 md:text-5xl mb-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">Premium</span> Community
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -92,7 +92,7 @@ const PremiumCommunity = () => {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Premium Concierge Intake */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+          <div className="form-shell p-8 md:p-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-2">
               Premium Concierge Intake
             </h3>
@@ -213,7 +213,7 @@ const PremiumCommunity = () => {
           </div>
 
           {/* Choose Your Subscription */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+          <div className="form-shell p-8 md:p-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-2">
               Choose Your Subscription
             </h3>
@@ -333,7 +333,7 @@ const PremiumCommunity = () => {
           </div>
 
           {/* Selected Plan Snapshot */}
-          <div className="bg-gradient-to-r from-yellow-50 to-red-50 rounded-2xl border-2 border-yellow-300 shadow-lg p-8">
+          <div className="soft-panel rounded-2xl border-2 border-yellow-300 p-8">
             <h3 className="text-xl font-bold text-slate-900 mb-4">Selected Plan Snapshot</h3>
             <div className="mb-4">
               <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500 mb-2">

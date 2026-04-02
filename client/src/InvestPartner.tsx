@@ -86,11 +86,11 @@ const InvestPartner = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 py-12 px-4 md:px-6">
+    <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl text-slate-900 md:text-5xl mb-2">
             Invest / <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">Partner</span> With Us
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
@@ -99,7 +99,7 @@ const InvestPartner = () => {
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+        <div className="form-shell p-8 md:p-10">
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Partner Type */}
             <div>

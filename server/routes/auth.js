@@ -115,20 +115,14 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ success: false, message: 'User already exists' });
     }
 
-    // Admin roles (superadmin, admin, support, marketing) can only be created via Thunder Client/API
-    // Public registration form should only allow: user, vendor, rider
+    // Allow all known roles for direct API usage (e.g. Thunder Client).
+    // Frontend registration UI should still only expose: user, vendor, rider.
     const adminRoles = ['superadmin', 'admin', 'support', 'marketing'];
     const publicRoles = ['user', 'vendor', 'rider'];
-    
-    if (role && adminRoles.includes(role)) {
-      return res.status(403).json({ 
-        success: false, 
-        message: 'Admin roles can only be created through admin panel. Please use the registration form for user, vendor, or rider accounts.' 
-      });
-    }
+    const allowedRoles = [...publicRoles, ...adminRoles];
 
-    // Only allow public roles from registration form
-    const normalizedRole = role && publicRoles.includes(role) ? role : 'user';
+    const requestedRole = typeof role === 'string' ? role.toLowerCase().trim() : '';
+    const normalizedRole = allowedRoles.includes(requestedRole) ? requestedRole : 'user';
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);

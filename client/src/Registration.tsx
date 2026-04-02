@@ -658,18 +658,19 @@ const Registration = () => {
 
                     {/* Attachments Section */}
                     <div className="border-t border-yellow-200 pt-4">
-                      <h3 className="text-lg font-bold text-slate-900 mb-3">Attachments</h3>
+                      <h3 className="text-lg font-bold text-slate-900 mb-1">Attachments</h3>
+                      <p className="text-sm text-slate-500 mb-3">All file uploads are optional. You can add documents later if needed.</p>
                       <div className="grid gap-3 md:grid-cols-2">
                         <FileInput
                           name="businessRegistration"
-                          label="Business Registration"
+                          label="Business Registration (optional)"
                           onChange={(files) => handleFoodVendorFileChange(files, 'businessRegistration')}
                           accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                         />
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Business License
+                            Business License (optional)
                           </label>
                           <input
                             type="file"
@@ -682,7 +683,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            TIN
+                            TIN (optional)
                           </label>
                           <input
                             type="file"
@@ -695,7 +696,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Certificate
+                            Certificate (optional)
                           </label>
                           <input
                             type="file"
@@ -708,7 +709,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Menu Samples
+                            Menu Samples (optional)
                           </label>
                           <input
                             type="file"
@@ -721,7 +722,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Video (30 Min max)
+                            Video (30 Min max, optional)
                           </label>
                           <input
                             type="file"
@@ -734,17 +735,16 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Restaurant/Place Photo <span className="text-red-500">*</span>
+                            Restaurant/Place Photo (optional)
                           </label>
                           <input
                             type="file"
                             name="restaurantPhoto"
                             onChange={handleFoodVendorFileChange}
                             accept="image/*"
-                            required
                             className="w-full px-4 py-2.5 border border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
                           />
-                          <p className="text-xs text-slate-500 mt-1">This photo will be displayed on the restaurants page</p>
+                          <p className="text-xs text-slate-500 mt-1">If provided, this photo can be shown on the restaurants page after approval.</p>
                         </div>
                       </div>
                     </div>
@@ -865,7 +865,7 @@ const Registration = () => {
                           value={loungeForm.businessType}
                           onChange={handleLoungeChange}
                           required
-                          className="w-full px-4 py-2.5 border border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                          className={`w-full px-4 py-2.5 border border-yellow-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 ${!loungeForm.businessType ? 'text-slate-300' : 'text-slate-900'}`}
                         >
                           <option value="">Select Business Type</option>
                           <option value="Lounge">Lounge</option>
@@ -905,11 +905,12 @@ const Registration = () => {
 
                     {/* Attachments Section */}
                     <div className="border-t border-yellow-200 pt-4">
-                      <h3 className="text-lg font-bold text-slate-900 mb-3">Attachments</h3>
+                      <h3 className="text-lg font-bold text-slate-900 mb-1">Attachments</h3>
+                      <p className="text-sm text-slate-500 mb-3">All file uploads are optional. You can add documents later if needed.</p>
                       <div className="grid gap-3 md:grid-cols-2">
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Business Registration
+                            Business Registration (optional)
                           </label>
                           <input
                             type="file"
@@ -922,7 +923,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Business License
+                            Business License (optional)
                           </label>
                           <input
                             type="file"
@@ -935,7 +936,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            TIN
+                            TIN (optional)
                           </label>
                           <input
                             type="file"
@@ -948,7 +949,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Certificate
+                            Certificate (optional)
                           </label>
                           <input
                             type="file"
@@ -961,7 +962,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Menu Samples
+                            Menu Samples (optional)
                           </label>
                           <input
                             type="file"
@@ -974,7 +975,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Video (30 Min max)
+                            Video (30 Min max, optional)
                           </label>
                           <input
                             type="file"
@@ -987,7 +988,7 @@ const Registration = () => {
 
                         <div>
                           <label className="block text-sm font-semibold text-slate-700 mb-2">
-                            Photos
+                            Photos (optional)
                           </label>
                           <input
                             type="file"
@@ -1305,9 +1306,15 @@ const Registration = () => {
                         />
                       </div>
 
+                      <div className="md:col-span-2">
+                        <p className="text-sm text-slate-500 border-t border-yellow-200 pt-4">
+                          Attachments (optional): upload business documents if you have them ready.
+                        </p>
+                      </div>
+
                       <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
-                          Business Registration
+                          Business Registration (optional)
                         </label>
                         <input
                           type="file"
@@ -1320,7 +1327,7 @@ const Registration = () => {
 
                       <div>
                         <label className="block text-sm font-semibold text-slate-700 mb-2">
-                          Business License
+                          Business License (optional)
                         </label>
                         <input
                           type="file"

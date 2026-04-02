@@ -222,9 +222,9 @@ const Restaurants = () => {
   const { restaurants: filteredRestaurants, menuItems: filteredMenuItems } = getFilteredResults()
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 md:pb-0">
-      <div className="bg-white border-b border-orange-100 sticky top-[73px] z-20">
-        <div className="mx-auto max-w-7xl px-4 md:px-6 py-4">
+    <div className="min-h-screen bg-transparent pb-20 md:pb-0">
+      <div className="sticky top-[73px] z-20 border-b border-orange-100/70 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6">
           {/* Search and Filter Type */}
           <div className="mb-4">
             <div className="flex flex-col md:flex-row gap-4">
@@ -236,7 +236,7 @@ const Restaurants = () => {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search restaurants, food items, or cuisines..."
-                    className="w-full px-4 py-3 pl-12 rounded-lg border border-orange-200 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    className="field-input w-full pl-12"
                   />
                   <svg
                     className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400"
@@ -260,12 +260,12 @@ const Restaurants = () => {
               </div>
               
               {/* Filter Type Buttons */}
-              <div className="flex gap-2">
+              <div className="grid grid-cols-3 gap-2 sm:flex">
                 <button
                   onClick={() => setFilterType('all')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all ${
                     filterType === 'all'
-                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-md'
+                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-[0_16px_30px_rgba(249,115,22,0.22)]'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
@@ -273,9 +273,9 @@ const Restaurants = () => {
                 </button>
                 <button
                   onClick={() => setFilterType('restaurants')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all ${
                     filterType === 'restaurants'
-                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-md'
+                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-[0_16px_30px_rgba(249,115,22,0.22)]'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
@@ -283,9 +283,9 @@ const Restaurants = () => {
                 </button>
                 <button
                   onClick={() => setFilterType('food')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`rounded-2xl px-4 py-2.5 text-sm font-semibold transition-all ${
                     filterType === 'food'
-                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-md'
+                      ? 'bg-gradient-to-r from-yellow-400 to-red-500 text-white shadow-[0_16px_30px_rgba(249,115,22,0.22)]'
                       : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
                   }`}
                 >
@@ -296,7 +296,7 @@ const Restaurants = () => {
           </div>
 
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <h1 className="text-2xl md:text-3xl font-bold text-slate-900">
+            <h1 className="font-display text-3xl text-slate-900 md:text-4xl">
               {category ? `${category.charAt(0).toUpperCase() + category.slice(1)} Restaurants` : 
                filterType === 'restaurants' ? 'Restaurants' :
                filterType === 'food' ? 'Food Items' :
@@ -308,7 +308,7 @@ const Restaurants = () => {
               <select
                 value={filters.sort}
                 onChange={(e) => setFilters({ ...filters, sort: e.target.value })}
-                className="px-4 py-2 rounded-lg border border-orange-200 text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="field-input rounded-2xl px-4 py-2.5 text-sm font-medium"
               >
                 <option value="rating">Highest Rated</option>
                 <option value="deliveryTime">Fastest Delivery</option>
@@ -318,7 +318,7 @@ const Restaurants = () => {
               <select
                 value={filters.minRating}
                 onChange={(e) => setFilters({ ...filters, minRating: Number(e.target.value) })}
-                className="px-4 py-2 rounded-lg border border-orange-200 text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="field-input rounded-2xl px-4 py-2.5 text-sm font-medium"
               >
                 <option value="0">All Ratings</option>
                 <option value="4">4+ Stars</option>
@@ -328,7 +328,7 @@ const Restaurants = () => {
               <select
                 value={filters.priceRange}
                 onChange={(e) => setFilters({ ...filters, priceRange: e.target.value })}
-                className="px-4 py-2 rounded-lg border border-orange-200 text-sm font-medium text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="field-input rounded-2xl px-4 py-2.5 text-sm font-medium"
               >
                 <option value="all">All Prices</option>
                 <option value="$">$ Budget</option>
@@ -340,7 +340,7 @@ const Restaurants = () => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 md:px-6 py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 md:px-6">
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[...Array(8)].map((_, i) => (
@@ -367,7 +367,7 @@ const Restaurants = () => {
             {/* Restaurants Grid */}
             {filteredRestaurants.length > 0 && (
               <div className="mb-8">
-                <h2 className="text-xl font-bold text-slate-900 mb-4">Restaurants</h2>
+                <h2 className="font-display mb-4 text-2xl text-slate-900">Restaurants</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {filteredRestaurants.map((restaurant) => (
                     <Link key={restaurant.id} to={`/dashboard/restaurant/${restaurant.id}`}>
@@ -381,7 +381,7 @@ const Restaurants = () => {
             {/* Menu Items Grid */}
             {filteredMenuItems.length > 0 && (
               <div>
-                <h2 className="text-xl font-bold text-slate-900 mb-4">Food Items</h2>
+                <h2 className="font-display mb-4 text-2xl text-slate-900">Food Items</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                   {filteredMenuItems.map((item) => (
                     <Link 

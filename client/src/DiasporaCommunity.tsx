@@ -57,11 +57,11 @@ const DiasporaCommunity = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 py-12 px-4 md:px-6">
+    <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl text-slate-900 md:text-5xl mb-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">Diaspora</span> Premium Community
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-slate-700 mb-3">
@@ -74,7 +74,7 @@ const DiasporaCommunity = () => {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Subscription Selection - First */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+          <div className="form-shell p-8 md:p-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-6">
               Choose Your Subscription
             </h3>
@@ -85,8 +85,8 @@ const DiasporaCommunity = () => {
                 onClick={() => setSubscriptionType('monthly')}
                 className={`relative cursor-pointer rounded-xl border-2 p-6 transition-all ${
                   subscriptionType === 'monthly'
-                    ? 'border-yellow-400 bg-yellow-50 shadow-md'
-                    : 'border-slate-300 hover:border-yellow-300'
+                    ? 'choice-tile border-yellow-400 bg-yellow-50 shadow-md'
+                    : 'choice-tile border-slate-300 hover:border-yellow-300'
                 }`}
               >
                 {subscriptionType === 'monthly' && (
@@ -112,8 +112,8 @@ const DiasporaCommunity = () => {
                 onClick={() => setSubscriptionType('annual')}
                 className={`relative cursor-pointer rounded-xl border-2 p-6 transition-all ${
                   subscriptionType === 'annual'
-                    ? 'border-yellow-400 bg-yellow-50 shadow-md'
-                    : 'border-slate-300 hover:border-yellow-300'
+                    ? 'choice-tile border-yellow-400 bg-yellow-50 shadow-md'
+                    : 'choice-tile border-slate-300 hover:border-yellow-300'
                 }`}
               >
                 {subscriptionType === 'annual' && (
@@ -137,7 +137,7 @@ const DiasporaCommunity = () => {
           </div>
 
           {/* Selected Plan Summary */}
-          <div className="bg-gradient-to-r from-yellow-50 to-red-50 rounded-2xl border-2 border-yellow-300 shadow-lg p-8">
+          <div className="soft-panel rounded-2xl border-2 border-yellow-300 p-8">
             <h3 className="text-xl font-bold text-slate-900 mb-4">Selected Plan</h3>
             <div className="flex items-center justify-between mb-4">
               <div>
@@ -152,7 +152,7 @@ const DiasporaCommunity = () => {
           </div>
 
           {/* Member Details Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+          <div className="form-shell p-8 md:p-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-2">
               Member Details
             </h3>

@@ -64,16 +64,16 @@ const WomenInitiatives = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 py-12 px-4 md:px-6">
+    <div className="page-shell min-h-screen bg-gradient-to-b from-yellow-50 via-white to-yellow-100 px-4 py-12 md:px-6 md:py-16">
       <div className="mx-auto max-w-3xl">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="mb-10 text-center">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-red-500 flex items-center justify-center">
               <span className="text-3xl">👩</span>
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2">
+          <h1 className="font-display text-4xl text-slate-900 md:text-5xl mb-2">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-red-500">Women</span> Initiatives
           </h1>
           <h2 className="text-2xl md:text-3xl font-semibold text-slate-700 mb-3">
@@ -85,7 +85,7 @@ const WomenInitiatives = () => {
         </div>
 
         {/* Form */}
-        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10">
+        <div className="form-shell p-8 md:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Full Name */}
             <div>
@@ -99,7 +99,7 @@ const WomenInitiatives = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your full name"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -116,7 +116,7 @@ const WomenInitiatives = () => {
                 required
                 min="1"
                 placeholder="Enter your age"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -132,7 +132,7 @@ const WomenInitiatives = () => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your email"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -147,7 +147,7 @@ const WomenInitiatives = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -162,7 +162,7 @@ const WomenInitiatives = () => {
                 value={formData.whatsapp}
                 onChange={handleChange}
                 placeholder="Enter your whatsapp (optional)"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -177,7 +177,7 @@ const WomenInitiatives = () => {
                 value={formData.telegram}
                 onChange={handleChange}
                 placeholder="Enter your telegram (optional)"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -192,7 +192,7 @@ const WomenInitiatives = () => {
                 value={formData.location}
                 onChange={handleChange}
                 placeholder="Enter your location"
-                className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all"
+                className="field-input"
               />
             </div>
 
@@ -226,7 +226,7 @@ const WomenInitiatives = () => {
                   onChange={handleFileChange}
                   accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
                   required
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100"
+                  className="field-input file:mr-4 file:rounded-xl file:border-0 file:bg-yellow-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-yellow-700 hover:file:bg-yellow-100"
                 />
                 <p className="text-xs text-slate-500 mt-1">Max: 5MB</p>
               </div>
@@ -242,7 +242,7 @@ const WomenInitiatives = () => {
                   onChange={handleFileChange}
                   accept="image/*"
                   required
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100"
+                  className="field-input file:mr-4 file:rounded-xl file:border-0 file:bg-yellow-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-yellow-700 hover:file:bg-yellow-100"
                 />
                 <p className="text-xs text-slate-500 mt-1">Max: 5MB</p>
               </div>
@@ -257,7 +257,7 @@ const WomenInitiatives = () => {
                   name="certificates"
                   onChange={handleFileChange}
                   accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                  className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100"
+                  className="field-input file:mr-4 file:rounded-xl file:border-0 file:bg-yellow-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-yellow-700 hover:file:bg-yellow-100"
                 />
                 <p className="text-xs text-slate-500 mt-1">Max: 5MB</p>
               </div>
@@ -283,7 +283,7 @@ const WomenInitiatives = () => {
         </div>
 
         {/* Survey Section */}
-        <div className="mt-8 bg-white rounded-2xl shadow-lg p-8 text-center">
+        <div className="form-shell mt-8 p-8 text-center">
           <div className="mb-4">
             <span className="text-4xl">📋</span>
           </div>

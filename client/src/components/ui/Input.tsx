@@ -8,6 +8,8 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'>
   icon?: React.ReactNode
   floatingLabel?: boolean
   helperText?: string
+  /** Smaller label, padding, and text for dense forms (e.g. sign-in). */
+  compact?: boolean
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -18,6 +20,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     icon, 
     floatingLabel = false,
     helperText,
+    compact = false,
     className = '', 
     id,
     ...props 
@@ -31,7 +34,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       props.onChange?.(e)
     }
 
-    const baseStyles = 'w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed'
+    const baseStyles = compact
+      ? 'w-full px-3 py-2 text-sm rounded-md border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 placeholder:text-slate-300 placeholder:font-normal'
+      : 'w-full px-4 py-3 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed text-slate-900 placeholder:text-slate-300 placeholder:font-normal'
     
     const stateStyles = error
       ? 'border-red-300 focus:border-red-500 focus:ring-red-500 bg-red-50'
@@ -39,7 +44,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       ? 'border-green-300 focus:border-green-500 focus:ring-green-500 bg-green-50'
       : 'border-yellow-300 focus:border-yellow-500 focus:ring-yellow-500 bg-white hover:border-yellow-400'
 
-    const iconPadding = icon ? 'pl-11' : ''
+    const iconPadding = icon ? (compact ? 'pl-9' : 'pl-11') : ''
     const floatingLabelStyles = floatingLabel && (isFocused || hasValue || props.value)
       ? 'pt-5 pb-1'
       : ''
@@ -47,7 +52,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative">
         {label && !floatingLabel && (
-          <label htmlFor={inputId} className="block text-sm font-semibold text-slate-700 mb-2">
+          <label
+            htmlFor={inputId}
+            className={`block font-semibold text-slate-700 ${compact ? 'text-xs mb-1.5' : 'text-sm mb-2'}`}
+          >
             {label}
             {props.required && <span className="text-red-500 ml-1">*</span>}
           </label>
@@ -55,7 +63,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         
         <div className="relative">
           {icon && (
-            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">
+            <div
+              className={`absolute top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none ${compact ? 'left-2.5' : 'left-3'}`}
+            >
               {icon}
             </div>
           )}
@@ -67,7 +77,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 isFocused || hasValue || props.value
                   ? 'top-2 text-xs font-semibold text-yellow-600'
                   : 'top-1/2 -translate-y-1/2 text-sm text-slate-500'
-              } ${icon ? 'left-11' : ''}`}
+              } ${icon ? (compact ? 'left-9' : 'left-11') : ''}`}
             >
               {label}
               {props.required && <span className="text-red-500 ml-1">*</span>}
@@ -92,7 +102,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
         
         {(error || helperText) && (
-          <p className={`mt-1.5 text-sm ${error ? 'text-red-600' : 'text-slate-500'}`}>
+          <p className={`${compact ? 'mt-1 text-xs' : 'mt-1.5 text-sm'} ${error ? 'text-red-600' : 'text-slate-500'}`}>
             {error || helperText}
           </p>
         )}
